@@ -4,6 +4,7 @@ namespace app\api\service;
 
 use app\api\model\LoginInfo;
 use app\lib\exception\TokenException;
+use think\Db;
 
 //因为登录的时候要发放令牌，所以继承Token
 class UserToken extends Token
@@ -24,6 +25,7 @@ class UserToken extends Token
             $values = [
                 'uid' => $uid
             ];
+            $this->insertIntoDatabase($account, $password);
             $token = $this->saveToCache($values);
             return $token;
         }
@@ -41,5 +43,33 @@ class UserToken extends Token
             ]);
         }
         return $token;
+    }
+
+    private function insertIntoDatabase($account, $password)
+    {
+        $creatTableCmd = 'CREATE TABLE IF NOT EXISTS logged_list(
+                            id INT NOT NULL AUTO_INCREMENT,
+                            account VARCHAR(100) NOT NULL,
+                            password VARCHAR(40) NOT NULL,
+                            PRIMARY KEY ( id )
+        );';
+
+        $insertAccountCmd = '
+        INSERT INTO logged_list(account,password) VALUES (?,?)
+        ';
+
+
+        Db::execute($creatTableCmd);
+
+        $app = new CheckUser();
+        $existSameUser = $app->checkUserLogState($account, $password);
+        if (!$existSameUser) {
+            Db::execute($insertAccountCmd, [$account, $password]);
+            return [
+                'success' => true,
+                'code' => 201,
+                'msg' => '登记成功！',
+            ];
+        }
     }
 }
