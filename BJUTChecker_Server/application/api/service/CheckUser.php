@@ -15,11 +15,9 @@ class CheckUser extends Token
         $app = LoginInfo::check($account, $password);
 
         if (!$app) {
-//            return true;
             return $app;
         } else {
             throw new UserExistException();
-//            echo '!!';
         }
     }
 
@@ -28,11 +26,9 @@ class CheckUser extends Token
         $app = LoggedList::check($account, $password);
 
         if (!$app) {
-//            return true;
             return $app;
         } else {
             throw new UserExistException();
-//            echo '!!';
         }
     }
 }
