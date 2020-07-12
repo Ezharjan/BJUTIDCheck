@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>北工大学生入校学生名单</title>
+</head>
+<style>
+    #title {
+        width: 410px;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        -webkit-align-items: center;
+        justify-content: center;
+    }
+    
+    #save {
+        height: auto;
+        width: auto;
+        font-size: large;
+        display: flex;
+        margin: 10px;
+    }
+</style>
+<div id="title">
+    <p>
+        <h3>入校学生名单</h3>
+        <h4 id="count"></h4>
+    </p>
+</div>
+<div id="template"></div>
+<button id="save" onclick="exportNameList()">下载</button>
+<script src="../js/jquery-1.8.2.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/getList.js"></script>
+
+<body>
+</body>
+
+</html>

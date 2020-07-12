@@ -1,15 +1,16 @@
 window.base = {
-    // g_restUrl: 'http://39.100.122.133/BJUTIDCheck/BJUTChecker_Server/public/index.php/api/v1/login',
-    g_restUrl: 'http://127.0.0.1:88/BJUTIDCheck/BJUTChecker_Server/public/index.php/api/v1/login',
+    baseUrl: 'http://127.0.0.1:88/BJUTIDCheck/BJUTChecker_Server/public/index.php/api/v1/',
 
-    getData: function(params) {
+    getData: function(params, exactUrl) {
+        const toUrl = this.baseUrl.concat(exactUrl);
+        console.warn(toUrl);
         if (!params.type) {
             params.type = 'get';
         }
         var that = this;
         $.ajax({
             type: params.type,
-            url: this.g_restUrl + params.url,
+            url: toUrl + params.url,
             data: params.data,
             beforeSend: function(XMLHttpRequest) {
                 if (params.tokenFlag) {

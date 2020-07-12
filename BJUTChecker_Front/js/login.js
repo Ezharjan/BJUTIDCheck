@@ -23,7 +23,6 @@ $(function() {
                 }
             },
             eCallback: function(e) {
-
                 switch (e.status) {
                     case 401:
                         warner('姓名、学号输入有误或不在准入名单内！ ');
@@ -36,7 +35,7 @@ $(function() {
                 }
             }
         };
-        window.base.getData(params);
+        window.base.getData(params, 'login');
     });
 
     $(document).on('focus', '.normal-input', function() {
