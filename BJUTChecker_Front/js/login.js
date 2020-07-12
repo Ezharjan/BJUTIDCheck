@@ -11,7 +11,6 @@ $(function() {
             return;
         }
         var params = {
-            // url: 'token/app',
             url: '',
             type: 'post',
             data: { account: $account.val(), password: $password.val() },
@@ -24,9 +23,16 @@ $(function() {
                 }
             },
             eCallback: function(e) {
-                if (e.status == 401) {
-                    window.alert("姓名、学号输入有误或不在准入名单内！ ");
-                    $('.error-tips').text(' 姓名、学号输入有误或不在准入名单内！ ').show().delay(2000).hide(0);
+
+                switch (e.status) {
+                    case 401:
+                        warner('姓名、学号输入有误或不在准入名单内！ ');
+                        break;
+                    case 403:
+                        warner('已经登记，请不要重复操作！ ');
+                        break;
+                    default:
+                        break;
                 }
             }
         };
@@ -44,3 +50,8 @@ $(function() {
         }
     });
 });
+
+const warner = function(alertMsg) {
+    window.alert(alertMsg);
+    $('.error-tips').text(alertMsg).show().delay(2000).hide(0);
+}

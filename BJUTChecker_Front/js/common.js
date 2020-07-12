@@ -1,5 +1,6 @@
 window.base = {
-    g_restUrl: 'http://39.100.122.133/BJUTCheck/public/index.php/api/v1/login',
+    // g_restUrl: 'http://39.100.122.133/BJUTIDCheck/BJUTChecker_Server/public/index.php/api/v1/login',
+    g_restUrl: 'http://127.0.0.1:88/BJUTIDCheck/BJUTChecker_Server/public/index.php/api/v1/login',
 
     getData: function(params) {
         if (!params.type) {
@@ -16,9 +17,11 @@ window.base = {
                 }
             },
             success: function(res) {
+                console.log("From server: ", res);
                 params.sCallback && params.sCallback(res);
             },
             error: function(res) {
+                console.log(res.responseText);
                 params.eCallback && params.eCallback(res);
             }
         });
